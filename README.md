@@ -11,37 +11,37 @@ Python Code: Implements classification using MobileNetV2, ResNet, ViT, and SVM o
 
 Below is a concise outline of how to work with the MATLAB scripts for radar data processing. These steps are summarized from the final report; please refer there for more details if needed.
 
-    Load the Radar Data:
+Load the Radar Data:
 
         Place your binary *.dat file(s) (recorded by Ancortek SDR-KIT software) in a known directory.
 
         Modify the data_dir and file_name variables in the MATLAB script to point to the correct file path.
 
-    Read and Parse Header:
+Read and Parse Header:
 
         The first few values in the *.dat file store radar parameters (center frequency, sweep time, number of time samples per sweep, bandwidth).
 
         The script automatically extracts these parameters for use in downstream processing.
 
-    Reshape IQ Data:
+Reshape IQ Data:
 
         The raw IQ samples are split into two channels (I/Q), reshaped into a matrix representing [samples per chirp × number of chirps].
 
         If dual-channel data is included, each channel is processed separately.
 
-    Range FFT:
+Range FFT:
 
         A fast-time FFT is applied to each chirp to convert beat frequencies into range bins.
 
         Only the positive half of the FFT is retained for practical reasons (real-valued beat signals).
 
-    MTI (Moving Target Indicator) Filtering:
+MTI (Moving Target Indicator) Filtering:
 
         A high-pass filter is applied along the slow-time dimension to remove stationary clutter (walls, stationary objects).
 
         Optional: Discard the first range bin if it contains strong direct coupling or filter artifacts.
 
-    Select Target Range Bin and Generate Spectrogram:
+Select Target Range Bin and Generate Spectrogram:
 
         Identify the range bin corresponding to the chest location (e.g., bin 3–4).
 
@@ -49,13 +49,7 @@ Below is a concise outline of how to work with the MATLAB scripts for radar data
 
         Parameters typically include a window size (e.g., 256), overlap (e.g., 90%), and FFT length.
 
-    (Optional) IQ Phase Extraction:
-
-        Some scripts may compute the instantaneous phase from I/Q data to examine breathing patterns directly in the time domain.
-
-        Note that short data segments (10 s) may not yield strong apnea vs. normal distinctions in phase signals.
-
-    Save or Export Results:
+Save or Export Results:
 
         The final output is usually saved as images (PNG/JPG) or MATLAB figures, which can be used for classification in Python.
 
