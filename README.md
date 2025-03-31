@@ -25,7 +25,7 @@ Read and Parse Header:
 
 Reshape IQ Data:
 
-        The raw IQ samples are split into two channels (I/Q), reshaped into a matrix representing [samples per chirp × number of chirps].
+        The raw IQ samples are split into two channels (I/Q), reshaped into a matrix representing [samples per chirp × number of chirps]. Remember, this depend on your saving data sturcture.
 
         If dual-channel data is included, each channel is processed separately.
 
